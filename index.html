@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Camel Race</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="start-screen" class="screen">
+    <h1>Camel Race</h1>
+    <p>Enter your name to start racing:</p>
+    <input type="text" id="player-name" placeholder="Your name">
+    <div class="buttons">
+      <button id="btn-start">Start &amp; Wait</button>
+      <button id="btn-bots">Play Against Computer</button>
+    </div>
+    <div id="share-link" style="display: none;">
+      <p>Share this link with your friends to join:</p>
+      <input type="text" id="share-url" readonly>
+    </div>
+  </div>
+
+  <div id="waiting-screen" class="screen" style="display: none;">
+    <h2>Waiting for other players…</h2>
+    <p>Share this link to invite players:</p>
+    <input type="text" id="waiting-url" readonly>
+    <button id="btn-play-now">Play Now (vs bots)</button>
+  </div>
+
+  <div id="game-screen" class="screen" style="display: none;">
+    <canvas id="gameCanvas"></canvas>
+    <div id="scoreboard" class="scoreboard"></div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

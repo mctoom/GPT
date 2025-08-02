@@ -1,0 +1,227 @@
+/* Basic styling for Camel Race game */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5e8d0;
+  color: #444;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Remove extra padding from the game screen so the canvas and scoreboard can
+   occupy the full viewport.  Without this override the bottom lane was
+   clipped due to the default padding. */
+#game-screen {
+  padding: 0;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  color: #b96d13;
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 1em;
+  color: #b96d13;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 1em;
+  margin: 10px 0;
+  width: 80%;
+  max-width: 300px;
+  border: 2px solid #b96d13;
+  border-radius: 5px;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1em;
+  background-color: #b96d13;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #d57f1f;
+}
+
+#gameCanvas {
+  background-color: #fff;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+/*
+ * Scoreboard styles
+ *
+ * The scoreboard is positioned over the canvas so that each player's
+ * information sits inside their lane. We make the scoreboard container
+ * span the full width of the screen and absolutely position the
+ * individual lane entries. A semi‑transparent background is applied to
+ * aid readability while still allowing the lane behind to be visible.
+ */
+.scoreboard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  background-color: transparent;
+  display: none;
+  /* ensure scoreboard covers the full height of the canvas so lane info
+     for lower lanes doesn't get clipped.  Without an explicit height,
+     absolutely positioned children could be cut off. */
+  height: 100vh;
+}
+
+/* Each lane info entry will be absolutely positioned in JS based on the
+   current lane height. We leave positioning properties unset here. */
+.lane-info {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4px 8px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.lane-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.lane-info .hearts {
+  display: flex;
+  margin-right: 10px;
+}
+
+.lane-info .heart {
+  width: 30px;
+  height: 30px;
+  margin-right: 4px;
+  background-color: red;
+  clip-path: polygon(
+    50% 0%, 61% 8%, 70% 20%, 75% 32%, 75% 43%, 68% 55%, 50% 70%, 32% 55%, 25% 43%, 25% 32%, 30% 20%, 39% 8%
+  );
+}
+
+.trophy {
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  background-color: gold;
+  clip-path: polygon(50% 0%, 60% 20%, 60% 50%, 70% 60%, 70% 80%, 30% 80%, 30% 60%, 40% 50%, 40% 20%);
+}
+
+/* Repeat button shown at the end of the game */
+.repeat-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 1em;
+  background-color: #b96d13;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.repeat-btn:hover {
+  background-color: #d57f1f;
+}
+
+/* Final scoreboard overlay shown at the end of the game.  It covers
+   the entire canvas and centers its contents. */
+.final-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  pointer-events: auto;
+  z-index: 20;
+}
+
+/* Panel inside the final overlay containing the scoreboard. */
+.final-panel {
+  background-color: #fff9e6;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  padding: 30px 40px;
+  max-width: 600px;
+  width: 80%;
+  color: #333;
+  text-align: center;
+}
+
+.final-panel h3 {
+  margin-top: 0;
+  font-size: 2em;
+  color: #b96d13;
+  margin-bottom: 0.5em;
+}
+
+.final-panel .final-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  font-size: 1.2em;
+}
+
+.final-panel .final-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0;
+  padding: 0 10px;
+}
+
+.final-panel .final-list .trophy {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 24px;
+  color: #d4af37;
+}
+
+/* Larger trophy icon used in the winner row of the final scoreboard.  It
+   displays an emoji and scales via font-size for clarity. */
+.trophy-big {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 36px;
+  line-height: 1;
+  color: #d4af37;
+}
+
+/* Adjust trophy inside final list: override default heart size to appear bigger */
