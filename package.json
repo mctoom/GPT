@@ -1,12 +1,9 @@
 {
   "name": "camel-race",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
+  "description": "A 2D camel racing game",
+  "main": "index.html",
+  "scripts": {},
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "MIT"
 }
